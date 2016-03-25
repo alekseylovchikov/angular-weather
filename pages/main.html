@@ -1,0 +1,25 @@
+<div class="row" ng-controller='mainController'>
+  <div class="col-md-8">
+  	<div class="row">
+  		<div class="col-md-12">
+		    <input type="text" class="form-control" placeholder="Введите название города" ng-model="city" ng-change="handleCity()" />
+		  </div>
+		  <div class="col-md-12" ng-show="city !== ''" >
+		    <h4 class="well">
+		      <p>Город: {{ weather.name }}</p>
+		      <p>Температура: {{ weather.main.temp }} C</p>
+		      <p>Облачность: {{ weather.weather[0].description }}</p>
+		    </h4>
+		    <p class="text-center"><button class="btn btn-primary" ng-click="addCity()"><i class="fa fa-plus-circle"></i> Сохранить город</button></p>
+		  </div>
+  	</div>
+  </div>
+  <div class="col-md-2">
+  	<ul class="list-group">
+  		<li class="list-group-item">Боровичи <a href="#"><i class="fa fa-trash pull-right"></i></a></li>
+  		<li class="list-group-item">Москва <a href="#"><i class="fa fa-trash pull-right"></i></a></li>
+  		<li class="list-group-item">Санкт-Петербург <a href="#"><i class="fa fa-trash pull-right"></i></a></li>
+  		<li class="list-group-item">Сочи <a href="#"><i class="fa fa-trash pull-right"></i></a></li>
+  	</ul>
+  </div>
+</div>

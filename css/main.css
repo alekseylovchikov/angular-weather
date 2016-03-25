@@ -1,0 +1,17 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.jumbotron {
+  background: -webkit-linear-gradient(top, #55C5C5, #4182B1);
+  color: #fff;
+  height: 200px;
+  border-radius: 0 !important;
+  margin-top: -30px;
+}
+
+.jumbotron h1 {
+  padding-top: 60px;
+  font-family: 'Lobster', cursive;
+  font-size: 60px;
+}

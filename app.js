@@ -1,8 +1,10 @@
+'use strict';
+
 var config = {
 	apiKey: 'ec6f6d31cbbd4a70207a854f166df01c'
 };
 
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'LocalStorageModule']);
 
 myApp.config(function($routeProvider) {
 	$routeProvider
@@ -23,25 +25,18 @@ myApp.directive('savedCity', function() {
 	};
 });
 
-myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$window', function($scope, $filter, $http, $log, $window) {
+myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$window', 'localStorageService', function($scope, $filter, $http, $log, $window, localStorageService) {
 	$scope.city = '';
+	$scope.citys = [];
+	$scope.savedCitys = [];
 	$scope.addedCitys = true;
 	$scope.noAddedCitys = false;
 
-	$scope.citys = [
-		{
-			name: 'Moscow',
-			temp: '8'
-		},
-		{
-			name: 'Borovichi',
-			temp: '5.6'
-		},
-		{
-			name: 'Novgorod',
-			temp: '7'
-		}
-	];
+	if (localStorageService.keys().length > 1) {
+		localStorageService.keys().forEach(function(key) {
+			$scope.savedCitys.push(localStorageService.get(key));
+		});
+	}
 
 	$window.navigator.geolocation.getCurrentPosition(function(position) {
 		var lat = position.coords.latitude,
@@ -63,5 +58,10 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 			.success(function(data) {
 				$scope.weatherResult = data;
 			});
+	};
+
+	$scope.addCity = function() {
+		localStorageService.set($scope.weatherResult.name, $scope.weatherResult);
+		$scope.savedCitys.push(localStorageService.get($scope.weatherResult.name));
 	};
 }]);

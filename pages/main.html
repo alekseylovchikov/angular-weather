@@ -24,8 +24,8 @@
 		</div>
 	</div>
 	<div class="col-md-4" ng-show="haveSavedCitys()">
-		<div class="list-group">
-			<saved-city ng-repeat="city in savedCitys" city-object="city"></saved-city>
-		</div>
+		<ul class="list-group">
+			<saved-city ng-repeat="city in savedCitys" city-object="city" ng-click="removeCity(city.name)"></saved-city>
+		</ul>
 	</div>
 </div>

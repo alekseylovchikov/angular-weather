@@ -33,15 +33,19 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 		return localStorageService.keys().length < 1;
 	};
 
-	if (localStorageService.keys().length >= 1) {
-		localStorageService.keys().forEach(function(key) {
-			$scope.savedCitys.push(localStorageService.get(key));
-		});
-	}
+	$scope.updateSavedCitys = function() {
+		if (localStorageService.keys().length >= 1) {
+			localStorageService.keys().forEach(function(key) {
+				$scope.savedCitys.push(localStorageService.get(key));
+			});
+		}
+	};
+
+	$scope.updateSavedCitys();
 
 	$window.navigator.geolocation.getCurrentPosition(function(position) {
 		var lat = position.coords.latitude,
-			lon = position.coords.longitude;
+				lon = position.coords.longitude;
 
 		$scope.$apply(function() {
 			$scope.lat = lat;
@@ -58,6 +62,9 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 		$http.get('//api.openweathermap.org/data/2.5/weather?q=' + $scope.city + ',ru&units=metric&lang=ru&appid=' + config.apiKey)
 			.success(function(data) {
 				$scope.weatherResult = data;
+			})
+			.error(function(error) {
+				$log.error(error);
 			});
 	};
 
@@ -65,6 +72,14 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 		if ($scope.weatherResult.name !== undefined) {
 			localStorageService.set($scope.weatherResult.name, $scope.weatherResult);
 			$scope.savedCitys.push(localStorageService.get($scope.weatherResult.name));
+			$scope.savedCitys = [];
+			$scope.updateSavedCitys();
 		}
+	};
+
+	$scope.removeCity = function(city) {
+		localStorageService.remove(city);
+		$scope.savedCitys = [];
+		$scope.updateSavedCitys();
 	};
 }]);

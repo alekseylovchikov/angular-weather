@@ -1,10 +1,8 @@
-'use strict';
-
-const config = {
+var config = {
 	apiKey: 'ec6f6d31cbbd4a70207a854f166df01c'
 };
 
-const myApp = angular.module('myApp', ['ngRoute', 'LocalStorageModule']);
+var myApp = angular.module('myApp', ['ngRoute', 'LocalStorageModule']);
 
 myApp.config(function($routeProvider) {
 	$routeProvider
@@ -27,21 +25,23 @@ myApp.directive('savedCity', function() {
 
 myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$window', 'localStorageService', function($scope, $filter, $http, $log, $window, localStorageService) {
 	$scope.city = '';
-	$scope.citys = [];
 	$scope.savedCitys = [];
-	$scope.addedCitys = function() {
-		return localStorageService.keys().length > 1;
+	$scope.haveSavedCitys = function() {
+		return localStorageService.keys().length >= 1;
+	};
+	$scope.noHaveSavedCitys = function() {
+		return localStorageService.keys().length < 1;
 	};
 
-	if (localStorageService.keys().length > 1) {
+	if (localStorageService.keys().length >= 1) {
 		localStorageService.keys().forEach(function(key) {
 			$scope.savedCitys.push(localStorageService.get(key));
 		});
 	}
 
 	$window.navigator.geolocation.getCurrentPosition(function(position) {
-		let lat = position.coords.latitude,
-				lon = position.coords.longitude;
+		var lat = position.coords.latitude,
+			lon = position.coords.longitude;
 
 		$scope.$apply(function() {
 			$scope.lat = lat;
@@ -62,7 +62,9 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 	};
 
 	$scope.addCity = function() {
-		localStorageService.set($scope.weatherResult.name, $scope.weatherResult);
-		$scope.savedCitys.push(localStorageService.get($scope.weatherResult.name));
+		if ($scope.weatherResult.name !== undefined) {
+			localStorageService.set($scope.weatherResult.name, $scope.weatherResult);
+			$scope.savedCitys.push(localStorageService.get($scope.weatherResult.name));
+		}
 	};
 }]);

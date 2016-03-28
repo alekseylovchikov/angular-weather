@@ -1,5 +1,5 @@
 <div class="row" ng-controller='mainController'>
-	<div ng-class="{ 'col-md-8': addedCitys, 'col-md-12': !addedCitys }">
+	<div ng-class="{ 'col-md-8': haveSavedCitys(), 'col-md-12': noHaveSavedCitys() }">
 		<div class="row">
 			<div class="col-md-12">
 				<input type="text" class="form-control" placeholder="Введите название города" ng-model="city" ng-change="handleCity()" autofocus />
@@ -23,7 +23,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4" ng-show="addedCitys">
+	<div class="col-md-4" ng-show="haveSavedCitys()">
 		<div class="list-group">
 			<saved-city ng-repeat="city in savedCitys" city-object="city"></saved-city>
 		</div>

@@ -2,7 +2,7 @@
 
 ### How to run? ###
 
-* git clone git@github.com:alekseylovchikov/angular-weather.git
+* git clone https://github.com/alekseylovchikov/angular-weather.git
 * cd angular-weather
 * npm i
 * npm start

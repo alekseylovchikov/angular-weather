@@ -1,10 +1,10 @@
 'use strict';
 
-var config = {
+const config = {
 	apiKey: 'ec6f6d31cbbd4a70207a854f166df01c'
 };
 
-var myApp = angular.module('myApp', ['ngRoute', 'LocalStorageModule']);
+const myApp = angular.module('myApp', ['ngRoute', 'LocalStorageModule']);
 
 myApp.config(function($routeProvider) {
 	$routeProvider
@@ -29,8 +29,9 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 	$scope.city = '';
 	$scope.citys = [];
 	$scope.savedCitys = [];
-	$scope.addedCitys = true;
-	$scope.noAddedCitys = false;
+	$scope.addedCitys = function() {
+		return localStorageService.keys().length > 1;
+	};
 
 	if (localStorageService.keys().length > 1) {
 		localStorageService.keys().forEach(function(key) {
@@ -39,8 +40,8 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 	}
 
 	$window.navigator.geolocation.getCurrentPosition(function(position) {
-		var lat = position.coords.latitude,
-			lon = position.coords.longitude;
+		let lat = position.coords.latitude,
+				lon = position.coords.longitude;
 
 		$scope.$apply(function() {
 			$scope.lat = lat;

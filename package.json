@@ -1,0 +1,25 @@
+{
+  "name": "weather",
+  "version": "0.0.1",
+  "description": "angular weather app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://fruitdev@bitbucket.org/fruitdev/weather-app.git"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "alekseylovchikov",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/fruitdev/weather-app#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "hapi": "^13.2.2",
+    "inert": "^3.2.0"
+  }
+}

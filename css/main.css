@@ -4,14 +4,17 @@ body {
 
 .jumbotron {
   background: -webkit-linear-gradient(top, #55C5C5, #4182B1);
+  background: -moz-linear-gradient(top, #55C5C5, #4182B1);
+  background: -o-linear-gradient(top, #55C5C5, #4182B1);
   color: #fff;
-  height: 200px;
+  height: 300px;
   border-radius: 0 !important;
   margin-top: -30px;
 }
 
 .jumbotron h1 {
-  padding-top: 60px;
+  padding-top: 110px;
   font-family: 'Lobster', cursive;
   font-size: 60px;
+  text-shadow: 1px 1px 1px #383838, 0 0 1em #44B380;
 }

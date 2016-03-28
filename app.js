@@ -47,7 +47,7 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 			$scope.lat = lat;
 			$scope.lon = lon;
 
-			$http.get('http://api.openweathermap.org/data/2.5/weather?lat=' + $scope.lat + '&lon=' + $scope.lon + '&units=metric&lang=ru&appid=' + config.apiKey)
+			$http.get('//api.openweathermap.org/data/2.5/weather?lat=' + $scope.lat + '&lon=' + $scope.lon + '&units=metric&lang=ru&appid=' + config.apiKey)
 				.success(function(data) {
 					$scope.geopositionWeather = data;
 				});
@@ -55,7 +55,7 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', '$wind
 	});
 
 	$scope.handleCity = function() {
-		$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + $scope.city + ',ru&units=metric&lang=ru&appid=' + config.apiKey)
+		$http.get('//api.openweathermap.org/data/2.5/weather?q=' + $scope.city + ',ru&units=metric&lang=ru&appid=' + config.apiKey)
 			.success(function(data) {
 				$scope.weatherResult = data;
 			});
